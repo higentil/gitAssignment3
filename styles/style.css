@@ -1,18 +1,181 @@
-#main{
-    width: 300px;
-    height: 280px;
-    background-color: black;
+
+:root {
+    /* Dark Mode */
+    --body-bg: #0a0a0c;
+    --calc-bg: #1c1c1e;
+    --display-bg: #2c2c2e;
+    --display-text: #ffffff;
+    --btn-num-bg: #3a3a3c;
+    --btn-num-text: #ffffff;
+    --btn-num-hover: #48484a;
+    --btn-op-bg: #ff9f0a;
+    --btn-op-text: #ffffff;
+    --btn-op-hover: #ffb340;
+    --btn-clear-bg: #a2a2a6;
+    --btn-clear-text: #000000;
+    --btn-clear-hover: #d1d1d6;
+    --btn-eq-bg: #30d158;
+    --btn-eq-text: #ffffff;
+    --btn-eq-hover: #34c759;
+    --text-label: #a2a2a6;
+    --shadow: rgba(0, 0, 0, 0.4);
 }
 
-input{
-    width: 20%;
+/* Light Mode */
+.light-mode {
+    --body-bg: #f4f6f9;
+    --calc-bg: #ffffff;
+    --display-bg: #f2f2f7;
+    --display-text: #000000;
+    --btn-num-bg: #e5e5ea;
+    --btn-num-text: #000000;
+    --btn-num-hover: #d1d1d6;
+    --btn-op-bg: #007aff; 
+    --btn-op-text: #ffffff;
+    --btn-op-hover: #3498ff;
+    --btn-clear-bg: #acacb0;
+    --btn-clear-text: #ffffff;
+    --btn-clear-hover: #8e8e93;
+    --btn-eq-bg: #34c759;
+    --btn-eq-text: #ffffff;
+    --btn-eq-hover: #28cd41;
+    --text-label: #8e8e93;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--body-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+.calculator-container {
+    width: 320px;
+    background-color: var(--calc-bg);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 12px 40px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme Switch UI */
+.theme-toggle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+}
+.theme-label {
+    color: var(--text-label);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.theme-toggle-btn {
+    background: var(--display-bg);
+    border: none;
+    cursor: pointer;
+    width: 40px;
     height: 40px;
-    font-size: 20px;
-    margin: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.theme-toggle-btn:active {
+    transform: scale(0.9);
 }
 
-#eee{
-    width: 94%;
-    height: 50px;
-    background-color: silver;
+.calculator-display {
+    width: 100%;
+    min-height: 80px;
+    background-color: var(--display-bg);
+    color: var(--display-text);
+    font-size: 2.6rem;
+    font-weight: 300;
+    text-align: right;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    overflow-x: auto;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    height: 60px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.05s ease;
+}
+.btn:active {
+    transform: scale(0.93);
+}
+
+.btn-number {
+    background-color: var(--btn-num-bg);
+    color: var(--btn-num-text);
+}
+.btn-number:hover {
+    background-color: var(--btn-num-hover);
+}
+
+.btn-operator {
+    background-color: var(--btn-op-bg);
+    color: var(--btn-op-text);
+}
+.btn-operator:hover {
+    background-color: var(--btn-op-hover);
+}
+
+.btn-clear {
+    background-color: var(--btn-clear-bg);
+    color: var(--btn-clear-text);
+}
+.btn-clear:hover {
+    background-color: var(--btn-clear-hover);
+}
+
+.btn-equals {
+    background-color: var(--btn-eq-bg);
+    color: var(--btn-eq-text);
+}
+.btn-equals:hover {
+    background-color: var(--btn-eq-hover);
+    border-radius: 20px;
+}
+
+.btn-equals {
+    border-radius: 30px;
+    grid-row: span 2;
+    height: auto;
+}
+.btn-zero {
+    grid-column: span 1;
 }
