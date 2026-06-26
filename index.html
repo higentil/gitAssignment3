@@ -2,43 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS-Calculator</title>
-
+    <title>Modern JS Calculator</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     
-    <div id="main">
-        <form action="" name="f">
-            <input type="text" name="ddd" placeholder="0" id="eee"> <br>
-            <input type="button" value="1" onclick="f.ddd.value+=1">
-            <input type="button" value="2" onclick="f.ddd.value+=2">
-            <input type="button" value="3" onclick="f.ddd.value+=3">
-            <input type="button" value="+" onclick="add()">
-            <br>
-            <input type="button" value="4" onclick="f.ddd.value+=4">
-            <input type="button" value="5" onclick="f.ddd.value+=5">
-            <input type="button" value="6" onclick="f.ddd.value+=6">
-            <input type="button" value="-" onclick="sub()">
-            <br>
-            <input type="button" value="7" onclick="f.ddd.value+=7">
-            <input type="button" value="8" onclick="f.ddd.value+=8">
-            <input type="button" value="9" onclick="f.ddd.value+=9">
-            <input type="button" value="/" onclick="di()">
-            <br>
-            <input type="button" value="c" onclick="f.ddd.value=''">
-            <input type="button" value="0" onclick="f.ddd.value+=0">
-            <input type="button" value="=" onclick="f.ddd.value=eval(f.ddd.value)">
-            <input type="button" value="x" onclick="mul()">
-            <br>
+   
+    <main class="calculator-container">
+        
+        <div class="theme-toggle-container">
+            <span class="theme-label">Theme</span>
+            <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span class="toggle-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="calculator-display" id="display" aria-live="polite">0</div>
+        
+        <div class="calculator-grid">
+            <button type="button" class="btn btn-clear" data-action="clear">C</button>
+            <button type="button" class="btn btn-operator" data-action="divide">÷</button>
+            <button type="button" class="btn btn-operator" data-action="multiply">×</button>
+            <button type="button" class="btn btn-operator" data-action="subtract">-</button>
 
-        </form>
+            <button type="button" class="btn btn-number">7</button>
+            <button type="button" class="btn btn-number">8</button>
+            <button type="button" class="btn btn-number">9</button>
+            <button type="button" class="btn btn-operator" data-action="add">+</button>
 
-    </div>
+            <button type="button" class="btn btn-number">4</button>
+            <button type="button" class="btn btn-number">5</button>
+            <button type="button" class="btn btn-number">6</button>
+            <button type="button" class="btn btn-equals" data-action="calculate">=</button>
+
+            <button type="button" class="btn btn-number">1</button>
+            <button type="button" class="btn btn-number">2</button>
+            <button type="button" class="btn btn-number">3</button>
+            <button type="button" class="btn btn-number btn-zero">0</button>
+        </div>
+
+    </main>
 
     <script src="scripts/main.js" defer></script>
 </body>
-
 </html>
