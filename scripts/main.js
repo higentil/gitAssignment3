@@ -1,59 +1,94 @@
-function add(){
-    var act = 0;
-    var b = 0;
+document.addEventListener("DOMContentLoaded", () => {
+    const display = document.getElementById("display");
+    const grid = document.querySelector(".calculator-grid");
+    const themeToggleBtn = document.getElementById("theme-toggle-btn");
+    const toggleIcon = themeToggleBtn.querySelector(".toggle-icon");
 
-    act = f.ddd.value;
-    b = act.charAt(act.length-1);
+    let expression = "";
 
-    if(b=='+' || b=='-' || b=='/' || b=='*'){
-        f.add.value = act.substring(0, act.length-1);
-        f.add.value +='+';
-    }else{
-        f.add.value +='+';
+    // Light/Dark Theme 
+    themeToggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+        
+        // Theme swap icons
+        if (document.body.classList.contains("light-mode")) {
+            toggleIcon.textContent = "☀️";
+        } else {
+            toggleIcon.textContent = "🌙";
+        }
+    });
+
+    grid.addEventListener("click", (event) => {
+        const button = event.target.closest("button");
+        if (!button) return;
+
+        const action = button.dataset.action;
+        const buttonContent = button.textContent;
+
+        if (!action) {
+            handleNumber(buttonContent);
+        } else if (action === "clear") {
+            handleClear();
+        } else if (action === "calculate") {
+            handleCalculate();
+        } else {
+            const operatorMap = { add: "+", subtract: "-", multiply: "*", divide: "/" };
+            handleOperator(operatorMap[action]);
+        }
+    });
+
+    function handleNumber(number) {
+        if (expression === "0" || expression === "Error") expression = "";
+        expression += number;
+        updateDisplay();
     }
-}
 
-function sub(){
-    var act = 0;
-    var b = 0;
+    function handleOperator(nextOperator) {
+        if (expression === "" || expression === "Error") return;
 
-    act = f.ddd.value;
-    b = act.charAt(act.length-1);
+        const lastChar = expression.trim().slice(-1);
+        const operators = ["+", "-", "*", "/"];
 
-    if(b=='+' || b=='-' || b=='/' || b=='*'){
-        f.add.value = act.substring(0, act.length-1);
-        f.add.value +='-';
-    }else{
-        f.add.value +='-';
+        if (operators.includes(lastChar)) {
+            expression = expression.slice(0, -1) + nextOperator;
+        } else {
+            expression += nextOperator;
+        }
+        updateDisplay();
     }
-}
 
-function di(){
-    var act = 0;
-    var b = 0;
-
-    act = f.ddd.value;
-    b = act.charAt(act.length-1);
-
-    if(b=='+' || b=='-' || b=='/' || b=='*'){
-        f.add.value = act.substring(0, act.length-1);
-        f.add.value +='/';
-    }else{
-        f.add.value +='/';
+    function handleClear() {
+        expression = "0";
+        updateDisplay();
     }
-}
 
-function mul(){
-    var act = 0;
-    var b = 0;
-
-    act = f.ddd.value;
-    b = act.charAt(act.length-1);
-
-    if(b=='+' || b=='-' || b=='/' || b=='*'){
-        f.add.value = act.substring(0, act.length-1);
-        f.add.value +='*';
-    }else{
-        f.add.value +='*';
+    function handleCalculate() {
+        if (expression === "" || expression === "Error") return;
+        
+        try {
+            const result = new Function(`return ${expression}`)();
+            
+            if (result === Infinity || isNaN(result)) {
+                expression = "Error";
+            } else {
+                expression = String(Number(result.toFixed(8)));
+            }
+        } catch (error) {
+            expression = "Error";
+        }
+        updateDisplay();
     }
-}
+
+    function updateDisplay() {
+        if (expression === "") {
+            display.textContent = "0";
+            return;
+        }
+    
+        display.textContent = expression
+            .replace(/\*/g, " × ")
+            .replace(/\//g, " ÷ ")
+            .replace(/\+/g, " + ")
+            .replace(/\-/g, " - ");
+    }
+});
